@@ -1,0 +1,15 @@
+{"Debug":{"InfoType":"DISK", "OS":"linux"}}
+
+{
+  "metrics":[{
+      "name":"/dev/xvda1",
+      "wtime":14374620,
+      "rtime":6928968,
+      "read_bytes":25208734720,
+      "write_bytes":22592716800,
+      "time":2230824,
+      "writes":1688416,
+      "reads":845641
+    }],
+  "timestamp":1441054458000
+}

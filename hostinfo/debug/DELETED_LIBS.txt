@@ -1,0 +1,42 @@
+{"Debug":{"InfoType":"DELETED_LIBS", "OS":"linux"}}
+
+{
+  "metrics":[{
+      "deleted_lib_name":"/[aio]",
+      "used_by_process":"mysqld"
+    },{
+      "deleted_lib_name":"/[aio]",
+      "used_by_process":"mysqld"
+    },{
+      "deleted_lib_name":"/[aio]",
+      "used_by_process":"mysqld"
+    },{
+      "deleted_lib_name":"/[aio]",
+      "used_by_process":"mysqld"
+    },{
+      "deleted_lib_name":"/[aio]",
+      "used_by_process":"mysqld"
+    },{
+      "deleted_lib_name":"/[aio]",
+      "used_by_process":"mysqld"
+    },{
+      "deleted_lib_name":"/[aio]",
+      "used_by_process":"mysqld"
+    },{
+      "deleted_lib_name":"/[aio]",
+      "used_by_process":"mysqld"
+    },{
+      "deleted_lib_name":"/[aio]",
+      "used_by_process":"mysqld"
+    },{
+      "deleted_lib_name":"/[aio]",
+      "used_by_process":"mysqld"
+    },{
+      "deleted_lib_name":"/[aio]",
+      "used_by_process":"mysqld"
+    },{
+      "deleted_lib_name":"/[aio]",
+      "used_by_process":"mysqld"
+    }],
+  "timestamp":1441054459000
+}
