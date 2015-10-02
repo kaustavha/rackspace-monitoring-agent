@@ -46,8 +46,9 @@ function Info:_run(callback)
   end
 
   local reader = Reader:new()
-  local child = misc.run('sh', '-c', command)
-  child.pipe(reader)
+  print(command)
+  local child = misc.run('sh', {'-c', command})
+  child:pipe(reader)
   reader:on('error', function(err) misc.safeMerge(errTable, err) end)
   reader:on('data', function(datum) misc.safeMerge(outTable, datum) end)
   reader:once('end', finalCb)

@@ -15,18 +15,7 @@ limitations under the License.
 --]]
 local HostInfo = require('./base').HostInfo
 local misc = require('./misc')
-local Transform = require('stream').Transform
-
---------------------------------------------------------------------------------------------------------------------
-local Reader = Transform:extend()
-function Reader:initialize()
-  Transform.initialize(self, {objectMode = true})
-end
-
-function Reader:_transform(line, cb)
-  self:push(line)
-  return cb()
-end
+local fs = require('fs')
 --------------------------------------------------------------------------------------------------------------------
 
 --[[ Read arbitrary files ]]--
@@ -37,25 +26,23 @@ function Info:initialize(params)
 end
 
 function Info:_run(callback)
-  local filename = self.params
+  local name = self.params
   local outTable, errTable = {}, {}
 
-  local function finalCb()
+  local function finalCb(err, data)
+    misc.safeMerge(errTable, err)
+    misc.safeMerge(outTable, data)
     self:_pushParams(errTable, outTable)
     return callback()
   end
 
-  local readStream = misc.read(filename)
-  local reader = Reader:new()
-  -- Catch no file found errors
-  readStream:on('error', function(err)
-    misc.safeMerge(errTable, err)
-    return finalCb()
-  end)
-  readStream:pipe(reader)
-  reader:on('data', function(data) misc.safeMerge(outTable, data) end)
-  reader:on('error', function(err) misc.safeMerge(errTable, err) end)
-  reader:once('end', finalCb)
+  local type = fs.statSync(name).type
+
+  if type == 'directory' then
+    fs.readdir(name, finalCb)
+  elseif type == 'file' then
+    fs.readFile(name, finalCb)
+  end
 end
 
 function Info:getPlatforms()
