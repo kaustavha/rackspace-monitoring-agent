@@ -47,7 +47,7 @@ function VirgoProtocolConnection:_bindHandlers()
   end
 
   self._responses['host_info.get'] = function(self, request, callback)
-    local info = hostInfo.create(request.params.type)
+    local info = hostInfo.create(request.params.type, request.params.params)
     info:run(function(err)
       if err then
         self._log(logging.ERR, fmt('host_info.get error', tostring(err)))
