@@ -24,6 +24,10 @@ local fmt = string.format
 local HostInfo = require('./base').HostInfo
 local Info = HostInfo:extend()
 
+function Info:initialize(params)
+  HostInfo.initialize(self)
+  print(params)
+end
 
 function Info:_run(callback)
   local fileList = {
