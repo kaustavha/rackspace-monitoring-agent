@@ -24,22 +24,20 @@ function Reader:initialize()
 end
 
 function Reader:_transform(line, cb)
-  local iter = line:gmatch("%S+")
-  local key = iter()
-  local val = iter()
-  self:push({[key] = val})
+  self:push(line)
   return cb()
 end
 --------------------------------------------------------------------------------------------------------------------
 
 --[[ Read arbitrary files ]]--
 local Info = HostInfo:extend()
-function Info:initialize()
+function Info:initialize(params)
   HostInfo.initialize(self)
+  self.params = params
 end
 
 function Info:_run(callback)
-  local filename = "/etc/login.defs"
+  local filename = self.params
   local outTable, errTable = {}, {}
 
   local function finalCb()
@@ -65,7 +63,7 @@ function Info:getPlatforms()
 end
 
 function Info:getType()
-  return 'LOGIN'
+  return 'READ'
 end
 
 exports.Info = Info
