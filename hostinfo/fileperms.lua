@@ -19,6 +19,7 @@ local exists = fs.exists
 local stat = fs.stat
 local band = bit.band
 local fmt = string.format
+local safeMerge = require('./misc').safeMerge
 
 --[[ Check file permissions ]]--
 local HostInfo = require('./base').HostInfo
@@ -26,7 +27,8 @@ local Info = HostInfo:extend()
 
 function Info:initialize(params)
   HostInfo.initialize(self)
-  print(params)
+  -- Expect params to be a list
+  self.params = params
 end
 
 function Info:_run(callback)
@@ -50,6 +52,7 @@ function Info:_run(callback)
     '/etc/login.defs',
     '/var/run/php-fpm.sock'
   }
+  if self.params then safeMerge(fileList, self.params) end
   local outTable = {}
   local errTable = {}
 
